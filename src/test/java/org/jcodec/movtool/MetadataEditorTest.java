@@ -2,6 +2,7 @@ package org.jcodec.movtool;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 
 import org.jcodec.common.io.IOUtils;
@@ -37,7 +38,7 @@ public class MetadataEditorTest {
     
     @Test
     public void testInplace() throws IOException {
-        File file = File.createTempFile("metaedit_test", ".mp4");
+        File file = Files.createTempFile("metaedit_test", ".mp4").toFile();
         file.deleteOnExit();
         IOUtils.copyFile(new File(KEYED_PATH), file);
         
@@ -62,7 +63,7 @@ public class MetadataEditorTest {
     }
 
     private void keyedWriteSub(boolean fast) throws IOException {
-        File file = File.createTempFile("metaedit_test", ".mp4");
+        File file = Files.createTempFile("metaedit_test", ".mp4").toFile();
         file.deleteOnExit();
         IOUtils.copyFile(new File(KEYED_PATH), file);
 
@@ -85,7 +86,7 @@ public class MetadataEditorTest {
     }
     
     public void testItunesdWrite() throws IOException {
-        File file = File.createTempFile("metaedit_test", ".mp4");
+        File file = Files.createTempFile("metaedit_test", ".mp4").toFile();
         file.deleteOnExit();
         IOUtils.copyFile(new File(ITUNES_PATH), file);
 

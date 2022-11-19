@@ -3,6 +3,7 @@ package org.jcodec.movtool;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -133,7 +134,7 @@ public class StripTest {
         track.setEdits(edits);
 
         new Strip().strip(movie);
-        File tempFile2 = File.createTempFile("strip", "m4a");
+        File tempFile2 = Files.createTempFile("strip", "m4a").toFile();
         new Flatten().flatten(fullMovie, tempFile2);
 
         FileChannelWrapper ch = NIOUtils.readableChannel(tempFile2);
@@ -189,7 +190,7 @@ public class StripTest {
         }
         
         
-        File tempFile2 = File.createTempFile("strip", "m4a");
+        File tempFile2 = Files.createTempFile("strip", "m4a").toFile();
         new Flatten().flatten(fullMovie, tempFile2);
 
         FileChannelWrapper ch = NIOUtils.readableChannel(tempFile2);
@@ -227,7 +228,7 @@ public class StripTest {
     }
 
     public static File createTestMovie(byte[] sample) throws IOException {
-        File tmp = File.createTempFile("test_", ".m4a");
+        File tmp = Files.createTempFile("test_", ".m4a").toFile();
         FileChannelWrapper ch = null;
         try {
             ch = NIOUtils.writableChannel(tmp);

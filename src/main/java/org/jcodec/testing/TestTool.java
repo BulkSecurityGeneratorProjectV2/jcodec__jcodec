@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +44,9 @@ public class TestTool {
         this.jm = jm;
         this.errs = new File(errs);
 
-        coded = File.createTempFile("seq", ".264");
-        decoded = File.createTempFile("seq_dec", ".yuv");
-        jmconf = File.createTempFile("ldecod", ".conf");
+        coded = Files.createTempFile("seq", ".264").toFile();
+        decoded = Files.createTempFile("seq_dec", ".yuv").toFile();
+        jmconf = Files.createTempFile("ldecod", ".conf").toFile();
 
         prepareJMConf();
     }

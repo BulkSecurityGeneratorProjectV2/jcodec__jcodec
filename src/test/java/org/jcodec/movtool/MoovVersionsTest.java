@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import static org.jcodec.movtool.MoovVersions.addVersion;
@@ -22,7 +23,7 @@ public class MoovVersionsTest {
 
     @Before
     public void setup() throws IOException {
-        tempFile = File.createTempFile("testVersions", ".mp4");
+        tempFile = Files.createTempFile("testVersions", ".mp4").toFile();
         tempFile.deleteOnExit();
         NIOUtils.copyFile(new File("src/test/resources/applegps/gps1.mp4"), tempFile);
     }

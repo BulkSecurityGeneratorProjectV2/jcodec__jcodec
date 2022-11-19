@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -156,7 +157,7 @@ public class DashStreamDemuxer implements Demuxer {
                         urlInit = new URL(url, segmentURL.media);
                     }
                     if (urlInit != null) {
-                        File tempFile = File.createTempFile("org.jcodec", fileName(urlInit.getPath()));
+                        File tempFile = Files.createTempFile("org.jcodec", fileName(urlInit.getPath())).toFile();
                         System.out.println("Fetching fragment: " + urlInit.toExternalForm());
                         NIOUtils.fetchUrl(urlInit, tempFile);
                         DashMP4DemuxerTrack demuxer = DashMP4DemuxerTrack
@@ -222,19 +223,19 @@ public class DashStreamDemuxer implements Demuxer {
             if (getSegmentTemplate() != null && getSegmentTemplate().initialization != null) {
                 String tmp = getSegmentTemplate().initialization.replace("$RepresentationID$", selectedRprz);
                 URL urlInit = new URL(url, tmp);
-                File tempFile = File.createTempFile("org.jcodec", fileName(urlInit.getPath()));
+                File tempFile = Files.createTempFile("org.jcodec", fileName(urlInit.getPath())).toFile();
                 System.out.println("Fetching init: " + urlInit.toExternalForm());
                 NIOUtils.fetchUrl(urlInit, tempFile);
                 initFile = tempFile;
             } else if (rprz.baseURL != null) {
                 URL urlInit = new URL(url, rprz.baseURL);
-                File tempFile = File.createTempFile("org.jcodec", fileName(urlInit.getPath()));
+                File tempFile = Files.createTempFile("org.jcodec", fileName(urlInit.getPath())).toFile();
                 System.out.println("Fetching init: " + urlInit.toExternalForm());
                 NIOUtils.fetchUrl(urlInit, tempFile);
                 initFile = tempFile;
             } else if (rprz.segmentList != null && rprz.segmentList.initialization != null) {
                 URL urlInit = new URL(url, rprz.segmentList.initialization.sourceURL);
-                File tempFile = File.createTempFile("org.jcodec", fileName(urlInit.getPath()));
+                File tempFile = Files.createTempFile("org.jcodec", fileName(urlInit.getPath())).toFile();
                 System.out.println("Fetching init: " + urlInit.toExternalForm());
                 NIOUtils.fetchUrl(urlInit, tempFile);
                 initFile = tempFile;
